@@ -10,7 +10,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 
-export default function LoginTest() {
+const LoginTest = () => {
   return (
     <Flex
       width="100vw"
@@ -46,3 +46,5 @@ export default function LoginTest() {
     </Flex>
   );
 }
+
+export default LoginTest;

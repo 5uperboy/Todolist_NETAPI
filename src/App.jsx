@@ -6,6 +6,9 @@ import TodoPage from "./pages/TodoPage";
 import LoginTest from "./test/login-test";
 import RegisterTest from "./test/register-test";
 import SidebarTest from "./test/sidebar-test";
+import HeaderTest from "./test/header-test";
+import TaskContentTest from "./test/tasksContent-test";
+import NewTasks from "./test/NewTasks";
 
 function App() {
   return (
@@ -19,6 +22,9 @@ function App() {
           <Route path="login-test" element={<LoginTest />} />
           <Route path="register-test" element={<RegisterTest />} />
           <Route path="sidebar" element={<SidebarTest />} />
+          <Route path="header-test" element={<HeaderTest />} />
+          <Route path="content" element={<TaskContentTest />} />
+          <Route path="newTasks" element={<NewTasks />} />
         </Route>
       </Routes>
     </Router>
