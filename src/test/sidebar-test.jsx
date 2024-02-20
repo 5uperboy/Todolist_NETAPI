@@ -11,16 +11,47 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { Icon } from "@chakra-ui/react";
-import { FaRegStickyNote, FaRegStar, FaSearch, FaSignOutAlt } from "react-icons/fa";
-import './sideBar-Test.css';
+import {
+  FaRegStickyNote,
+  FaRegStar,
+  FaSearch,
+  FaSignOutAlt,
+} from "react-icons/fa";
+import { useState } from "react";
+import { useTasks } from "../hooks/useTasks";
+import "./sideBar-Test.css";
+import AddTaskModalTest from "./addTaskModal-test";
 
 const SidebarTest = () => {
+  const { addTask } = useTasks();
+
+  const [showAddTaskModal, setShowAddTaskModal] = useState(false);
+
+  const handleShowAddTaskModal = () => {
+    setShowAddTaskModal(true);
+  };
+
+  const handleCloseAddTaskModal = () => {
+    setShowAddTaskModal(false);
+  };
+
   return (
-    <Flex direction="column" w="200px" h="100vh" borderRight="#BCBCBC solid 1px">
+    <Flex
+      direction="column"
+      w="200px"
+      h="100vh"
+      borderRight="#BCBCBC solid 1px"
+    >
       <Box bg="orange.200" h="20" w="100%" p={3}>
         <Flex alignItems="center">
           <Avatar name="Dan Abrahmov" src="https://bit.ly/dan-abramov" />
-          <Text fontSize="xl" ml={2} noOfLines={[1, 2]} color="#0D3B66" fontWeight="semibold">
+          <Text
+            fontSize="xl"
+            ml={2}
+            noOfLines={[1, 2]}
+            color="#0D3B66"
+            fontWeight="semibold"
+          >
             User Name
           </Text>
         </Flex>
@@ -31,23 +62,30 @@ const SidebarTest = () => {
             <InputLeftElement>
               <Icon as={FaSearch} color="#BCBCBC" />
             </InputLeftElement>
-            <Input type="text" placeholder="Search task" w="100%" borderColor="#BCBCBC" borderRadius="15px"/>
+            <Input
+              type="text"
+              placeholder="Search task"
+              w="100%"
+              borderColor="#BCBCBC"
+              borderRadius="15px"
+            />
           </InputGroup>
         </HStack>
-        <HStack className="sidebar-btn" w="100%">
+        <HStack className="sidebar-btn" w="100%" onClick={handleShowAddTaskModal}>
           <Icon as={FaRegStickyNote} boxSize={5} />
           <Text fontSize="xl">Add New Task</Text>
         </HStack>
         <HStack className="sidebar-btn">
           <Icon as={FaRegStar} boxSize={5} />
-          <Text fontSize="xl" >Important</Text>
+          <Text fontSize="xl">Important</Text>
         </HStack>
         <Spacer />
         <HStack mb={5} className="sidebar-btn">
           <Icon as={FaSignOutAlt} boxSize={5} />
-          <Text fontSize="xl" >Sign Out</Text>
+          <Text fontSize="xl">Sign Out</Text>
         </HStack>
       </VStack>
+      <AddTaskModalTest onAdd={addTask} isOpen={showAddTaskModal} onClose={handleCloseAddTaskModal} />
     </Flex>
   );
 };

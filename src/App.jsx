@@ -9,6 +9,7 @@ import SidebarTest from "./test/sidebar-test";
 import HeaderTest from "./test/header-test";
 import TaskContentTest from "./test/tasksContent-test";
 import NewTasks from "./test/NewTasks";
+import AddTaskModalTest from "./test/addTaskModal-test";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="header-test" element={<HeaderTest />} />
           <Route path="content" element={<TaskContentTest />} />
           <Route path="newTasks" element={<NewTasks />} />
+          <Route path="addTaskModal" element={<AddTaskModalTest />} />
         </Route>
       </Routes>
     </Router>
