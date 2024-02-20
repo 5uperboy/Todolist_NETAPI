@@ -19,7 +19,7 @@ AddTask.propTypes = {
       setError("Please add a task");
       return;
     }
-    const dateModified = new Date().toISOString();
+    const dateModified = new Date().toLocaleDateString();
     onAdd({ name, description, isComplete, dateModified });
 
     setText("");
