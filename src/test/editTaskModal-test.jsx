@@ -10,26 +10,32 @@ import {
   FormControl,
   FormLabel,
   Input,
-  Textarea,
   Text,
+  Textarea,
   useToast,
+  Switch,
+  Stack,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import PropTypes from "prop-types";
 
-const AddTaskModalTest = ({ isOpen, onClose, onAdd }) => {
-  AddTaskModalTest.propTypes = {
+const EditTaskModalTest = ({ isOpen, onClose, onEdit }) => {
+  EditTaskModalTest.propTypes = {
     isOpen: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
-    onAdd: PropTypes.func.isRequired,
+    onEdit: PropTypes.func.isRequired,
   };
 
   const [name, setText] = useState("");
   const [description, setDescription] = useState("");
-  const [isComplete, setReminder] = useState(false);
   const [error, setError] = useState("");
+  const [isEditable, setIsEditable] = useState(false);
 
   const toast = useToast();
+
+  const toggleEditable = () => {
+    setIsEditable(!isEditable);
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -39,13 +45,8 @@ const AddTaskModalTest = ({ isOpen, onClose, onAdd }) => {
       return;
     }
     const dateModified = new Date();
-    onAdd({ name, description, isComplete, dateModified });
+    onEdit({ name, description, dateModified });
     onClose();
-
-    setText("");
-    setDescription("");
-    setReminder(false);
-    setError("");
   };
 
   return (
@@ -57,28 +58,41 @@ const AddTaskModalTest = ({ isOpen, onClose, onAdd }) => {
           color="#0D3B66"
           fontWeight="bold"
           borderTopRadius="15px"
+          fontSize={25}
         >
-          Add New Task
+          Task View
         </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <form id="add-form" onSubmit={onSubmit}>
+          <form id="edit-form" onSubmit={onSubmit}>
             <FormControl>
+              <Stack direction="row" spacing={0} justifyContent="end">
+                <FormLabel htmlFor="edit-switch" fontSize={18}>
+                  EDIT
+                </FormLabel>
+                <Switch
+                  id="edit-switch"
+                  size="lg"
+                  isChecked={isEditable}
+                  onChange={toggleEditable}
+                ></Switch>
+              </Stack>
               <FormLabel htmlFor="taskName">Task Name</FormLabel>
               <Input
-                isRequired
+                disabled={!isEditable}
+                id="taskName"
                 border="#BCBCBC 1px solid"
                 type="text"
-                id="taskName"
                 value={name}
                 onChange={(e) => setText(e.target.value)}
               />
               {error && <Text color="red">*{error}</Text>}
-              <FormLabel mt={4} htmlFor="taskDescription">
+              <FormLabel mt={4} htmlFor="taskDesc">
                 Description
               </FormLabel>
               <Textarea
-                id="taskDescription"
+                disabled={!isEditable}
+                id="taskDesc"
                 border="#BCBCBC 1px solid"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
@@ -93,11 +107,11 @@ const AddTaskModalTest = ({ isOpen, onClose, onAdd }) => {
           <Button
             type="submit"
             colorScheme="green"
-            form="add-form"
+            form="edit-form"
             onClick={() =>
               toast({
-                title: "Task Added Successfully!",
-                description: "New Task has been added to the list.",
+                title: "Task Edited Successfully!",
+                description: "A task has been updated!",
                 status: "success",
                 duration: 3000,
                 isClosable: true,
@@ -112,4 +126,4 @@ const AddTaskModalTest = ({ isOpen, onClose, onAdd }) => {
   );
 };
 
-export default AddTaskModalTest;
+export default EditTaskModalTest;

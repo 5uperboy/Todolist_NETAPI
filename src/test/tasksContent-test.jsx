@@ -17,11 +17,42 @@ import {
 } from "@chakra-ui/react";
 import { GoKebabHorizontal } from "react-icons/go";
 import { FaTrashAlt, FaEdit, FaEye } from "react-icons/fa";
+import { useState } from "react";
 import { useTasks } from "../hooks/useTasks";
 import { format } from "date-fns";
+import EditTaskModalTest from "./editTaskModal-test";
 
 const TasksContentTest = () => {
   const { tasks, deleteTask } = useTasks();
+  const { editTask } = useTasks();
+
+  const [showEditTaskModal, setShowEditTaskModal] = useState(false);
+  const [selectedTask, setSelectedTask] = useState(null);
+  const [isEditable, setIsEditable] = useState(false);
+
+  const handleViewTask = (task) => {
+    setSelectedTask(task);
+    setIsEditable(false);
+    setShowEditTaskModal(true);
+  };
+
+  const handleEditTask = (task) => {
+    setSelectedTask(task);
+    setIsEditable(true);
+    setShowEditTaskModal(true);
+  };
+
+  const handleCloseEditTaskModal = () => {
+    setShowEditTaskModal(false);
+  };
+
+  // const task = {
+  //   id: 1,
+  //   name: "Task 1",
+  //   description: "This is a description of task 1",
+  //   isComplete: false,
+  //   dateModified: new Date(),
+  // };
 
   return (
     <Box m={6}>
@@ -53,8 +84,18 @@ const TasksContentTest = () => {
                     variant="ghost"
                   ></MenuButton>
                   <MenuList>
-                    <MenuItem icon={<FaEye />}>View Task</MenuItem>
-                    <MenuItem icon={<FaEdit />}>Edit</MenuItem>
+                    <MenuItem
+                      icon={<FaEye />}
+                      onClick={() => handleViewTask(task)}
+                    >
+                      View Task
+                    </MenuItem>
+                    <MenuItem
+                      icon={<FaEdit />}
+                      onClick={() => handleEditTask(task)}
+                    >
+                      Edit
+                    </MenuItem>
                     <MenuItem
                       icon={<FaTrashAlt />}
                       color="red"
@@ -79,6 +120,13 @@ const TasksContentTest = () => {
           </Card>
         ))}
       </SimpleGrid>
+      <EditTaskModalTest
+        onEdit={editTask}
+        isOpen={showEditTaskModal}
+        onClose={handleCloseEditTaskModal}
+        task={selectedTask}
+        isEditable={isEditable}
+      />
     </Box>
   );
 };
