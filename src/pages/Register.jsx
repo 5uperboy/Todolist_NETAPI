@@ -1,68 +1,57 @@
-import { useState } from "react";
-import "./css/register.css";
-import { Link } from "react-router-dom";
-import axios from "axios";
+import {
+  Flex,
+  Box,
+  Center,
+  AbsoluteCenter,
+  Heading,
+  FormControl,
+  FormLabel,
+  Input,
+  Button,
+} from "@chakra-ui/react";
 
 const Register = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPass, setconfirmPass] = useState("");
-
-  const handleRegister = async (e) => {
-    e.preventDefault();
-    if (password !== confirmPass) {
-      alert("Passwords do not match");
-    } else {
-      try {
-        const response = await axios.post("http://localhost:5281/api/Users", {
-          username,
-          password,
-        });
-
-        if (response.status === 200) {
-          console.log("Registration successful");
-        } else {
-          console.error("Registration failed");
-        }
-      } catch (error) {
-        console.error("Registration failed:", error);
-      }
-    }
-  };
-
   return (
-    <form className="register-form">
-      <div className="register-form-wrap">
-        <h1 className="register-form-title">Create An Acount</h1>
-        <label className="register-form-label">Username</label>
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          className="register-form-input"
-        />
-        <label className="register-form-label">Password</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="register-form-input"
-        />
-        <label className="register-form-label">Confirm Password</label>
-        <input
-          type="password"
-          value={confirmPass}
-          onChange={(e) => setconfirmPass(e.target.value)}
-          className="register-form-input"
-        />
-        <button onClick={handleRegister} className="register-form-btn">
-          Register
-        </button>
-        <p style={{ textAlign: "center", marginTop: "15px" }}>
-          Already have an account? <Link to="/">Login</Link>
-        </p>
-      </div>
-    </form>
+    <Flex
+      width="100vw"
+      height="100vh"
+      justifyContent="center"
+      alignItems="center"
+    >
+      <Box
+        bg="#FAF0CA"
+        height="600px"
+        width="550px"
+        borderRadius="10px"
+        borderEndStartRadius="70px"
+        shadow="md"
+      >
+        <Center height="100%">
+          <AbsoluteCenter>
+            <Heading
+              size="lg"
+              fontFamily="'Kodchasan', sans-serif"
+              fontSize="40px"
+            >
+              Register An Account
+            </Heading>
+            <FormControl isRequired mt="10">
+              <FormLabel>Username</FormLabel>
+              <Input type="text" bg="#FFFFFF" borderColor="#BCBCBC" />
+              <FormLabel mt="3">Password</FormLabel>
+              <Input type="password" bg="#FFFFFF" borderColor="#BCBCBC" />
+              <FormLabel mt="3">Confirm Password</FormLabel>
+              <Input type="password" bg="#FFFFFF" borderColor="#BCBCBC" />
+              <Center mt="10">
+                <Button width="125px" size="md" colorScheme="facebook">
+                  Register
+                </Button>
+              </Center>
+            </FormControl>
+          </AbsoluteCenter>
+        </Center>
+      </Box>
+    </Flex>
   );
 };
 
