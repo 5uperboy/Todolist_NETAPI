@@ -1,9 +1,9 @@
 import { Grid, GridItem } from "@chakra-ui/react";
-import SidebarTest from "./sidebar-test";
-import HeaderTest from "./header-test";
-import TasksContentTest from "./tasksContent-test";
+import Sidebar from "./Sidebar";
+import Header from "./Header";
+import TodoContent from "./TodoContent";
 
-const NewTasks = () => {
+const TodoPage = () => {
   return (
     <Grid
       templateAreas={`"nav header"
@@ -16,16 +16,16 @@ const NewTasks = () => {
       fontWeight="bold"
     >
       <GridItem area={"header"}>
-        <HeaderTest />
+        <Header />
       </GridItem>
       <GridItem area={"nav"}>
-        <SidebarTest />
+        <Sidebar />
       </GridItem>
       <GridItem area={"main"}>
-        <TasksContentTest />
+        <TodoContent />
       </GridItem>
     </Grid>
   );
 };
 
-export default NewTasks;
+export default TodoPage;
