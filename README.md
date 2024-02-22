@@ -6,7 +6,7 @@ A practice todo web app using React, .NET, MSSQL Server
 - Vite + React: [Vite Documentation](https://vitejs.dev/) 
 - ChakraUI: [Chakra UI Documentation](https://chakra-ui.com/)
 - Git: [Download and Install Git](https://git-scm.com)
-- .NET 5: [Download and Install .NET 5](https://dotnet.microsoft.com/download/dotnet/5.0)
+- .NET 8: [Download and Install .NET 8](https://dotnet.microsoft.com/download/dotnet/8.0)
 - MSSQL Server: [Download and Install MSSQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
 
 ### Installation
