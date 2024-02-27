@@ -1,9 +1,17 @@
 import { Grid, GridItem } from "@chakra-ui/react";
+import { useAuth } from "../../utils/AuthContext";
+import { Navigate } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
 import TodoContent from "./TodoContent";
 
 const TodoPage = () => {
+  const { isLoggedIn } = useAuth();
+
+  if (!isLoggedIn) {
+    return <Navigate to="/" replace />;
+  }
+
   return (
     <Grid
       templateAreas={`"nav header"
