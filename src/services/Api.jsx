@@ -2,13 +2,13 @@ import axios from "axios";
 
 // Fetch Tasks
 export const fetchTasks = async () => {
-  const res = await axios.get("http://localhost:5281/api/TodoItems");
+  const res = await axios.get("https://localhost:7085/api/TodoItems");
   return res.data;
 };
 
 // Fetch Task
 export const fetchTask = async (id) => {
-  const res = await axios.get(`http://localhost:5281/api/TodoItems/${id}`);
+  const res = await axios.get(`https://localhost:7085/api/TodoItems/${id}`);
   return res.data;
 };
 
@@ -16,7 +16,7 @@ export const fetchTask = async (id) => {
 export const addTask = async (newTask) => {
   try {
     const res = await axios.post(
-      "http://localhost:5281/api/TodoItems",
+      "https://localhost:7085/api/TodoItems",
       newTask,
       {
         headers: {
@@ -35,7 +35,7 @@ export const addTask = async (newTask) => {
 export const deleteTask = async (id) => {
   if (window.confirm("Are you sure you want to delete this task?")) {
     try {
-      await axios.delete(`http://localhost:5281/api/TodoItems/${id}`);
+      await axios.delete(`https://localhost:7085/api/TodoItems/${id}`);
       return id;
     } catch (error) {
       console.error("Error deleting task:", error);
@@ -54,7 +54,7 @@ export const toggleComplete = async (id) => {
       isComplete: !taskToToggle.isComplete,
     };
     const res = await axios.put(
-      `http://localhost:5281/api/TodoItems/${id}`,
+      `https://localhost:7085/api/TodoItems/${id}`,
       updatedTask,
       {
         headers: {
@@ -73,7 +73,7 @@ export const toggleComplete = async (id) => {
 export const editTask = async (id, updatedTask) => {
   try {
     const res = await axios.put(
-      `http://localhost:5281/api/TodoItems/${id}`,
+      `https://localhost:7085/api/TodoItems/${id}`,
       updatedTask,
       {
         headers: {
